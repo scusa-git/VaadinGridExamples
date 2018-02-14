@@ -1,4 +1,4 @@
-package vaadin.grid.examples.ui.grid;
+package vaadin.grid.examples.ui.component.grid;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,11 +16,11 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Grid;
 
-import vaadin.grid.examples.ui.AbstractGridView;
+import vaadin.grid.examples.ui.component.abstracts.AbstractComponentView;
 
 @UIScope
 @SpringView
-public class GridOtherTest extends AbstractGridView {
+public class GridOtherTest extends AbstractComponentView {
 	private static final long serialVersionUID = -4401970044116538553L;
 
 	private static final Random RANDOM = new Random();
@@ -34,7 +34,7 @@ public class GridOtherTest extends AbstractGridView {
 			LocalDate.parse("2017-12-12")};
 
 	@Override
-	public Component getGrid() {
+	public Component getViewComponent() {
 
 		// basic setup
 		Grid<Row> grid = new Grid<>();

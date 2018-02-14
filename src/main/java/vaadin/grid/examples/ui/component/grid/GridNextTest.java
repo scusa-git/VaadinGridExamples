@@ -1,4 +1,4 @@
-package vaadin.grid.examples.ui.grid;
+package vaadin.grid.examples.ui.component.grid;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ import com.vaadin.ui.Grid.SelectionMode;
 
 import vaadin.grid.examples.dataset.DataSet;
 import vaadin.grid.examples.dataset.Row;
-import vaadin.grid.examples.ui.AbstractGridView;
+import vaadin.grid.examples.ui.component.abstracts.AbstractComponentView;
 
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
@@ -33,14 +33,13 @@ import com.vaadin.ui.VerticalLayout;
 
 @UIScope
 @SpringView
-public class GridNextTest extends AbstractGridView {
+public class GridNextTest extends AbstractComponentView {
 	private static final long serialVersionUID = -4401970044116538553L;
 	
 	AtomicInteger count = new AtomicInteger(0);
-
+	
 	@Override
-	public Component getGrid() {
-		
+	public Component getViewComponent() {
 		VerticalLayout layout = new VerticalLayout();
 		layout.setResponsive(true);
 		
@@ -63,7 +62,7 @@ public class GridNextTest extends AbstractGridView {
 		return grid;
 //		return layout;
 	}
-
+	
 	private void createGrid(Grid<Row> grid) {
 		// TODO Auto-generated method stub
 		DataSet dataSet = generateDataSet();
@@ -165,11 +164,4 @@ public class GridNextTest extends AbstractGridView {
 		
 		return new DataSet(columns, rows);
 	}
-
-	// simulation of data set object
-
-
-	// simulation of row object
-
-
 }

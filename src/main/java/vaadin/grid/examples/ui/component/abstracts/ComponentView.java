@@ -1,4 +1,4 @@
-package vaadin.grid.examples.ui.component;
+package vaadin.grid.examples.ui.component.abstracts;
 
 import com.vaadin.navigator.View;
 import com.vaadin.ui.Component;

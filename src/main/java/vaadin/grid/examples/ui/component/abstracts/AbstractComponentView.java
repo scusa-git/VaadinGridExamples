@@ -1,4 +1,4 @@
-package vaadin.grid.examples.ui.component;
+package vaadin.grid.examples.ui.component.abstracts;
 
 import javax.annotation.PostConstruct;
 

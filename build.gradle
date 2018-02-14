@@ -28,17 +28,16 @@ configurations.compile.exclude module: "spring-boot-starter-tomcat"
 
 dependencies {
     compile("com.vaadin:vaadin-spring-boot-starter:${vaadinSpringVersion}")
-
     compile("org.springframework.boot:spring-boot-starter-undertow:${springBootVersion}")
-
     compile ("de.java2html:java2html:5.0")
-
-    testCompile('org.springframework.boot:spring-boot-starter-test')
-
     compile ("com.vaadin:vaadin-server:${vaadinVersion}")
     compile ("com.vaadin:vaadin-client-compiled:${vaadinVersion}")
     compile ("com.vaadin:vaadin-themes:${vaadinVersion}")
     compile ("com.yahoo.platform.yui:yuicompressor:2.4.8")
+    
+    //runtime('org.springframework.boot:spring-boot-devtools')
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
 project.ext.vaadinThemeDir = "VAADIN/themes/${vaadinTheme}"

@@ -1,23 +1,21 @@
-package vaadin.grid.examples.ui.grid.objectarray;
+package vaadin.grid.examples.ui.component.grid.array;
 
 import com.vaadin.shared.ui.grid.HeightMode;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.UIScope;
-import com.vaadin.ui.ComboBox.CaptionFilter;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Grid;
-import com.vaadin.ui.Grid.Column;
 
-import vaadin.grid.examples.ui.AbstractGridView;
+import vaadin.grid.examples.ui.component.abstracts.AbstractComponentView;
 
 @UIScope
 @SpringView
-public class GridObjectArray extends AbstractGridView {
+public class GridObjectArray extends AbstractComponentView {
 
 	private static final long serialVersionUID = 4401818589006499177L;
 
 	@Override
-	public Component getGrid() {
+	public Component getViewComponent() {
 
 		Object[][] data = { 
 				{ "Sirius", -1.46f }, 

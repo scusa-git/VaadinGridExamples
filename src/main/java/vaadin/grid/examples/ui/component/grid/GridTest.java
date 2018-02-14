@@ -1,4 +1,4 @@
-package vaadin.grid.examples.ui.grid;
+package vaadin.grid.examples.ui.component.grid;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,16 +12,16 @@ import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Grid;
 
-import vaadin.grid.examples.ui.AbstractGridView;
+import vaadin.grid.examples.ui.component.abstracts.AbstractComponentView;
 
 @UIScope
 @SpringView
-public class GridTest extends AbstractGridView {
+public class GridTest extends AbstractComponentView {
 
 	private static final long serialVersionUID = 6767631954171581895L;
 
 	@Override
-	public Component getGrid() {
+	public Component getViewComponent() {
 		
 		
 		

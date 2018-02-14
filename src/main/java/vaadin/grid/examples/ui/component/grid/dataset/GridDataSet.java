@@ -1,4 +1,4 @@
-package vaadin.grid.examples.ui.grid.dataset;
+package vaadin.grid.examples.ui.component.grid.dataset;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,18 +12,17 @@ import com.vaadin.ui.Grid;
 
 import vaadin.grid.examples.dataset.DataSet;
 import vaadin.grid.examples.dataset.Row;
-import vaadin.grid.examples.ui.AbstractGridView;
+import vaadin.grid.examples.ui.component.abstracts.AbstractComponentView;
 
 @UIScope
 @SpringView
-public class GridDataSet extends AbstractGridView {
+public class GridDataSet extends AbstractComponentView {
 	
 	private static final long serialVersionUID = 7684427328297235539L;
 
 	@Override
-	public Component getGrid() {
-		
-		DataSet dataSet = createDataSet();
+	public Component getViewComponent() {
+DataSet dataSet = createDataSet();
 		
 		Grid<Row> grid = new Grid<>("Data Set");
 		grid.setItems(dataSet.getRows());
@@ -61,5 +60,4 @@ public class GridDataSet extends AbstractGridView {
 		return new DataSet(columns, rows);
 		
 	}
-
 }

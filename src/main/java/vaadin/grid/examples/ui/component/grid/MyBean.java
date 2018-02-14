@@ -1,4 +1,4 @@
-package vaadin.grid.examples.ui.grid;
+package vaadin.grid.examples.ui.component.grid;
 
 public class MyBean {
 	

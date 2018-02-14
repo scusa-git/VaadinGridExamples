@@ -1,4 +1,4 @@
-package vaadin.grid.examples.ui.grid;
+package vaadin.grid.examples.ui.component.grid;
 
 import java.util.ArrayList;
 import java.util.List;

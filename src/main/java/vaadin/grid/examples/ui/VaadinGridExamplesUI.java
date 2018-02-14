@@ -3,6 +3,7 @@ package vaadin.grid.examples.ui;
 import com.vaadin.annotations.Theme;
 import com.vaadin.data.TreeData;
 import com.vaadin.data.provider.TreeDataProvider;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.ExternalResource;
@@ -19,11 +20,14 @@ import de.java2html.javasource.JavaSource;
 import de.java2html.javasource.JavaSourceParser;
 import de.java2html.options.JavaSourceConversionOptions;
 import de.java2html.util.IllegalConfigurationException;
-import vaadin.grid.examples.ui.grid.GridNextTest;
-import vaadin.grid.examples.ui.grid.GridOtherTest;
-import vaadin.grid.examples.ui.grid.GridTest;
-import vaadin.grid.examples.ui.grid.dataset.GridDataSet;
-import vaadin.grid.examples.ui.grid.objectarray.GridObjectArray;
+import vaadin.grid.examples.ui.component.abstracts.ComponentView;
+import vaadin.grid.examples.ui.component.grid.GridNextTest;
+import vaadin.grid.examples.ui.component.grid.GridOtherTest;
+import vaadin.grid.examples.ui.component.grid.GridTest;
+import vaadin.grid.examples.ui.component.grid.array.GridObjectArray;
+import vaadin.grid.examples.ui.component.grid.dataset.GridDataSet;
+import vaadin.grid.examples.ui.dashboard.DashBoard;
+import vaadin.grid.examples.ui.menu.MenuItem;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -34,8 +38,8 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-@Theme("grid")
-@SpringUI
+//@Theme("grid")
+//@SpringUI
 public class VaadinGridExamplesUI extends UI {
 
     private static final long serialVersionUID = -33887281222947647L;
@@ -45,20 +49,18 @@ public class VaadinGridExamplesUI extends UI {
     protected static List<MenuItem> MENU_ITEMS;
     static {
         MENU_ITEMS = new ArrayList<>();
-        MENU_ITEMS.add(new MenuItem(ViewType.GRID, "NextTest", GridNextTest.class));
-        MENU_ITEMS.add(new MenuItem(ViewType.GRID, "OtherTest", GridOtherTest.class));
-        MENU_ITEMS.add(new MenuItem(ViewType.GRID, "TEST", GridTest.class));
-        MENU_ITEMS.add(new MenuItem(ViewType.GRID, "TEST", GridTest.class));
-        MENU_ITEMS.add(new MenuItem(ViewType.GRID, "TEST", GridTest.class));
-        MENU_ITEMS.add(new MenuItem(ViewType.GRID, "TEST", GridTest.class));
-        MENU_ITEMS.add(new MenuItem(ViewType.GRID, "TEST", GridTest.class));
-        MENU_ITEMS.add(new MenuItem(ViewType.GRID, "TEST", GridTest.class));
-        MENU_ITEMS.add(new MenuItem(ViewType.GRID, "TEST", GridTest.class));
-        MENU_ITEMS.add(new MenuItem(ViewType.GRID, "TEST", GridTest.class));
-        MENU_ITEMS.add(new MenuItem(ViewType.GRID, "TEST", GridTest.class));
-        MENU_ITEMS.add(new MenuItem(ViewType.GRID, "TEST", GridTest.class));
-        MENU_ITEMS.add(new MenuItem(ViewType.GRID_ARRAY, "Grid Array", GridObjectArray.class));
-        MENU_ITEMS.add(new MenuItem(ViewType.GRID_DATASET, "Grid Data Set", GridDataSet.class));
+    		MENU_ITEMS = new ArrayList<>();
+
+    		MenuItem dashBoard = new MenuItem("Dashboard", DashBoard.class);
+    		MENU_ITEMS.add(dashBoard);
+
+    		MenuItem gridArray = new MenuItem("Grid Array", null);
+    		gridArray.addSubMenu(new MenuItem("Simple Example", GridObjectArray.class));
+    		MENU_ITEMS.add(gridArray);
+
+    		MenuItem gridArray2 = new MenuItem("Grid Array 2", null);
+    		gridArray2.addSubMenu(new MenuItem("Simple Example 2", GridObjectArray.class));
+    		MENU_ITEMS.add(gridArray2);
     }
 
     @Autowired
@@ -115,12 +117,12 @@ public class VaadinGridExamplesUI extends UI {
         navigator.addViewChangeListener(new ViewChangeListener() {
             @Override
             public boolean beforeViewChange(ViewChangeEvent event) {
-                GridView view = (GridView) event.getNewView();
+            	ComponentView view = (ComponentView) event.getNewView();
 //                codeLink.setResource(new ExternalResource(DemoUtils.getGithubPath(view.getClass())));
 //                codeLink.setTargetName("_blank");
 
-                String formattedSourceCode = getFormattedSourceCode(view.getSource());
-                codeLabel.setValue(formattedSourceCode);
+//                String formattedSourceCode = getFormattedSourceCode(view.getSource());
+//                codeLabel.setValue(formattedSourceCode);
                 return true;
             }
 
@@ -181,24 +183,8 @@ public class VaadinGridExamplesUI extends UI {
         TreeDataProvider<MenuItem> provider = new TreeDataProvider<>(treeData);
         tree.setDataProvider(provider);
 
-
-        for (ViewType viewType : ViewType.values()) {
-            List<MenuItem> children = new ArrayList<>();
-            for (MenuItem i : MENU_ITEMS) {
-                if (i.getType() == viewType) {
-                    children.add(i);
-                }
-            }
-
-            MenuItem parentItem = new MenuItem(viewType, viewType.name(), null);
-            treeData.addItem(null, parentItem);
-
-            for (MenuItem i : children) {
-                treeData.addItem(parentItem, i);
-               // tree.expand(parentItem);
-                tree.collapse(parentItem);
-            }
-        }
+        treeData.addItems(MENU_ITEMS, MenuItem::getSubMenus);
+        
         
 //        tree.addExpandListener(event -> {
 //        	MenuItem i = event.getExpandedItem();
@@ -228,7 +214,8 @@ public class VaadinGridExamplesUI extends UI {
         tree.setItemCaptionGenerator(MenuItem::getLabel);
         tree.setItemIconGenerator(item -> {
             if (item.getViewName() == null) {
-                return item.getType().getIcon();
+//                return item.getType().getIcon();
+            	return VaadinIcons.ALARM;
             }
             return null;
         });
