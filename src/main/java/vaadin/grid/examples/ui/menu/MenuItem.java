@@ -14,6 +14,7 @@ public class MenuItem implements Serializable {
 	private List<MenuItem> subMenus = new ArrayList<>();
 	private String label;
 	private String viewName;
+	private boolean selected;
 	private Class<? extends ComponentView> viewClass;
 
 	public MenuItem(String label, Class<? extends ComponentView> viewClass) {
@@ -54,5 +55,13 @@ public class MenuItem implements Serializable {
 
 	public Class<? extends ComponentView> getViewClass() {
 		return viewClass;
+	}
+
+	public boolean isSelected() {
+		return selected;
+	}
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
 	}
 }

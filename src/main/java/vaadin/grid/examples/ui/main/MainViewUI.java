@@ -139,6 +139,7 @@ public class MainViewUI extends UI {
 		treePanel.addStyleName("addon-menu");
 
 		Tree<MenuItem> tree = new Tree<>();
+		tree.setSizeFull();
 		tree.setResponsive(true);
 
 		TreeData<MenuItem> treeData = new TreeData<>();
@@ -149,24 +150,36 @@ public class MainViewUI extends UI {
 		treeData.addItems(MENU_ITEMS, MenuItem::getSubMenus);
 
 		tree.addItemClickListener(e -> {
-			MenuItem i = e.getItem();
-			if (i.getViewName() != null) {
-				getUI().getNavigator().navigateTo(i.getViewName());
+			MenuItem menuItem = e.getItem();
+			menuItem.setSelected(true);
+			if (menuItem.getViewName() != null) {
+				getUI().getNavigator().navigateTo(menuItem.getViewName());
 			} else {
+				
+				tree.collapse(MENU_ITEMS);
+				
+//				for (MenuItem menuRootItem : treeData.getRootItems()) {
+//					
+//					if (!menuRootItem.equals(menuItem)) {
+//						tree.collapse(menuRootItem);
+//						
+//					}
+//				}
 
-				for (MenuItem menuItem : treeData.getRootItems()) {
-					
-					System.out.println("--------------->"+ menuItem.getLabel());
-					
-					if (!i.equals(menuItem)) {
-						tree.collapse(menuItem);
-					}
-				}
-
-				tree.expand(i);
+				tree.expand(menuItem);
 			}
 		});
-
+		
+	// Show all leaf nodes as disabled
+//		tree.setStyleGenerator(styleGenerator);
+//		tree.setStyleGenerator(item -> {
+//			item.
+//		        if (!tree.getDataProvider().hasChildren(item))
+//		            return "leaf";
+//		        return null;
+//		    }
+//		);
+		
 		tree.setItemCaptionGenerator(MenuItem::getLabel);
 		tree.setItemIconGenerator(item -> {
 			if (item.getViewName() == null) {

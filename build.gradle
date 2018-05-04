@@ -81,7 +81,7 @@ war {
 }
 
 bootRun {
-    addResources = true
+    //addResources = true
     systemProperties System.properties
 }
 

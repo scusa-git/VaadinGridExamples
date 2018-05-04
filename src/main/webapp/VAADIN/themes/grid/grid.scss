@@ -12,7 +12,17 @@ $v-app-loading-text: "Vaadin Grid Examples";
   }
 
   .addon-menu {
-    background-color: white;
+    background-color: black;
+    color: white;
+    width: auto;
+  }
+  
+  .v-tree8-cell {
+  	padding-left: 10px;
+  }
+  
+  .v-tree8-row-focused .v-tree8-row-selected {
+  	font-weight: bold;
   }
 
   .addon-info-bar {
